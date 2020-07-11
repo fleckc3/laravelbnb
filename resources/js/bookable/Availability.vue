@@ -40,6 +40,9 @@
 
 <script>
 export default {
+    props: {
+        bookableId: String
+    },
     data() {
         return {
             from: null,
@@ -57,7 +60,7 @@ export default {
 
             // sends request for dates 'from and to' the the api endpoint to check 
             // Then saves the status code returned: 404/200....etc
-            axios.get(`/api/bookables/${this.$route.params.id}/availability?from=${this.from}&to=${this.to}`).then(response => {
+            axios.get(`/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`).then(response => {
                 this.status = response.status;
             }).catch(error => {
                 if (422 == error.response.status) {
@@ -81,7 +84,7 @@ export default {
             return 404 == this.status;
         }
     }
-};
+}
 </script>
 
 <style scoped>
