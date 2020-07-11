@@ -13,14 +13,30 @@ export default {
     },
     computed: {
         halfStar() {
-            return true;
+            const fraction = Math.round((this.rating - Math.floor(this.rating)) * 100);
+
+            // console.log(fraction);
+
+            return fraction > 0 && fraction < 50;
         },
         fullStars() {
-            return 3;
+            // > 4.5
+            // 4.3 = 4 and a half
+            return Math.round(this.rating);
         },
         emptyStars() {
-            return 1
+            // if rating 1.9, ceil(1.9) = 2, 5 - 2 = 3 ====> render three empty stars
+            return 5 - Math.ceil(this.rating);
         }
-    }
+    },
+    // created() {
+    //     const numbers = [0.9, 4.0, 4.4, 4.5, 4.6, 4.9];
+    //     numbers.forEach(n => {
+    //         // console.log(`round for ${n} is ${Math.round(n)}`);
+    //         // console.log(`floor for ${n} is ${Math.floor(n)}`);
+    //         // console.log(`ceil for ${n} is ${Math.ceil(n)}`);
+    //         // console.log('==================================================')
+    //     });
+    // }
 };
 </script>
