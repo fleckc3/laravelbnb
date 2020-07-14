@@ -9,28 +9,28 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="from">From</label>
-                <input 
-                    type="text" 
-                    name="From" 
-                    class="form-control form-control-sm" 
+                <input
+                    type="text"
+                    name="From"
+                    class="form-control form-control-sm"
                     placeholder="Start date"
                     v-model="from"
                     @keyup.enter="check"
-                    :class="[{'is-invalid': this.errorFor('from')}]" /> 
-                <div class="invalid-feedback" v-for="(error, index) in this.errorFor('from')" :key="'from' + index">{{ error }}</div> 
+                    :class="[{'is-invalid': this.errorFor('from')}]" />
+                <div class="invalid-feedback" v-for="(error, index) in this.errorFor('from')" :key="'from' + index">{{ error }}</div>
             </div>
 
             <div class="form-group col-md-6">
                 <label for="to">To</label>
-                <input 
-                    type="text" 
-                    name="To" 
-                    class="form-control form-control-sm" 
+                <input
+                    type="text"
+                    name="To"
+                    class="form-control form-control-sm"
                     placeholder="End date"
                     v-model="to"
                     @keyup.enter="check"
-                    :class="[{'is-invalid': this.errorFor('to')}]" /> 
-                <div class="invalid-feedback" v-for="(error, index) in this.errorFor('to')" :key="'to' + index">{{ error }}</div> 
+                    :class="[{'is-invalid': this.errorFor('to')}]" />
+                <div class="invalid-feedback" v-for="(error, index) in this.errorFor('to')" :key="'to' + index">{{ error }}</div>
             </div>
         </div>
 
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import {is422} from "./../shared/utils/response";
+
 export default {
     props: {
         bookableId: String
@@ -58,16 +60,21 @@ export default {
             this.loading = true;
             this.errors = null; // fresh errors every time request sent
 
-            // sends request for dates 'from and to' the the api endpoint to check 
+            // sends request for dates 'from and to' the the api endpoint to check
             // Then saves the status code returned: 404/200....etc
-            axios.get(`/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`).then(response => {
-                this.status = response.status;
-            }).catch(error => {
-                if (422 == error.response.status) {
+            axios
+                .get(`/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`
+                )
+                .then(response => {
+                    this.status = response.status;
+            })
+            .catch(error => {
+                if (is422(error)) {
                     this.errors = error.response.data.errors;
                 }
                 this.status = error.response.status;
-            }).then(() => (this.loading = false));
+            })
+            .then(() => (this.loading = false));
         },
         errorFor(field) {
             return this.hasErrors && this.errors[field] ? this.errors[field] : null;
@@ -76,7 +83,7 @@ export default {
     computed: {
         hasErrors() {
             return 422 == this.status && this.errors != null;
-        }, 
+        },
         hasAvailability() {
             return 200 == this.status;
         },
