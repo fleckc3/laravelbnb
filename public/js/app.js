@@ -61492,57 +61492,83 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-md-8" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-6 form-group" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("First names")]),
+          _c("label", { attrs: { for: "first_names" } }, [
+            _vm._v("First names")
+          ]),
           _vm._v(" "),
-          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", name: "first_names" }
+          })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6 form-group" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Last name")]),
+          _c("label", { attrs: { for: "last_names" } }, [_vm._v("Last name")]),
           _vm._v(" "),
-          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", name: "last_names" }
+          })
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-12 form-group" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Email")]),
+          _c("label", { attrs: { for: "email" } }, [_vm._v("Email")]),
           _vm._v(" "),
-          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", name: "email" }
+          })
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-6 form-group" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Street")]),
+          _c("label", { attrs: { for: "street" } }, [_vm._v("Street")]),
           _vm._v(" "),
-          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", name: "street" }
+          })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6 form-group" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("City")]),
+          _c("label", { attrs: { for: "city" } }, [_vm._v("City")]),
           _vm._v(" "),
-          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", name: "city" }
+          })
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-6 form-group" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Country")]),
+          _c("label", { attrs: { for: "country" } }, [_vm._v("Country")]),
           _vm._v(" "),
-          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", name: "country" }
+          })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-4 form-group" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("State")]),
+          _c("label", { attrs: { for: "state" } }, [_vm._v("State")]),
           _vm._v(" "),
-          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", name: "state" }
+          })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-2 form-group" }, [
-          _c("label", { attrs: { for: "" } }, [_vm._v("Zip code")]),
+          _c("label", { attrs: { for: "zip_code" } }, [_vm._v("Zip code")]),
           _vm._v(" "),
-          _c("input", { staticClass: "form-control", attrs: { type: "text" } })
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", name: "zip_code" }
+          })
         ])
       ]),
       _vm._v(" "),

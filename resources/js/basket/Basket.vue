@@ -4,42 +4,42 @@
             <div class="col-md-8">
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        <label for="">First names</label>
-                        <input type="text" class="form-control"/>
+                        <label for="first_names">First names</label>
+                        <input type="text" class="form-control" name="first_names"/>
                     </div>
                     <div class="col-md-6 form-group">
-                        <label for="">Last name</label>
-                        <input type="text" class="form-control"/>
+                        <label for="last_names">Last name</label>
+                        <input type="text" class="form-control" name="last_names"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 form-group">
-                        <label for="">Email</label>
-                        <input type="text" class="form-control"/>
+                        <label for="email">Email</label>
+                        <input type="text" class="form-control" name="email"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        <label for="">Street</label>
-                        <input type="text" class="form-control"/>
+                        <label for="street">Street</label>
+                        <input type="text" class="form-control" name="street"/>
                     </div>
                     <div class="col-md-6 form-group">
-                        <label for="">City</label>
-                        <input type="text" class="form-control"/>
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" name="city"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        <label for="">Country</label>
-                        <input type="text" class="form-control"/>
+                        <label for="country">Country</label>
+                        <input type="text" class="form-control" name="country"/>
                     </div>
                     <div class="col-md-4 form-group">
-                        <label for="">State</label>
-                        <input type="text" class="form-control"/>
+                        <label for="state">State</label>
+                        <input type="text" class="form-control" name="state"/>
                     </div>
                     <div class="col-md-2 form-group">
-                        <label for="">Zip code</label>
-                        <input type="text" class="form-control"/>
+                        <label for="zip_code">Zip code</label>
+                        <input type="text" class="form-control" name="zip_code"/>
                     </div>
                 </div>
                 <hr />
