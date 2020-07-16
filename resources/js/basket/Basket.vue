@@ -1,7 +1,54 @@
 <template>
     <div>
         <div class="row">
-            <div class="col-md-8">Checkout form</div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="">First names</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="">Last name</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <label for="">Email</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="">Street</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label for="">City</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="">Country</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label for="">State</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                    <div class="col-md-2 form-group">
+                        <label for="">Zip code</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <button type="submit" class="btn btn-large btn-primary btn-block">Book now!</button>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-4">
                 <div class="d-flex justify-content-between">
                     <h6 class="text-uppercase text-secondary font-weight-bolder">Your cart</h6>
@@ -11,7 +58,7 @@
                     </h6>
                 </div>
 
-                <transition-group tag="div">
+                <transition-group name="fade" tag="div">
                     <div v-for="item in basket" :key="item.bookable.id">
                         <div class="pt-2 pb-2 border-top d-flex justify-content-between">
                             <span><router-link :to="{name: 'bookable', params: {id: item.bookable.id}}">{{ item.bookable.title }}</router-link></span>

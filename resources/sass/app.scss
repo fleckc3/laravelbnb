@@ -13,7 +13,7 @@
 @import '~bootstrap/scss/bootstrap';
 
 .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
+    transition: opacity .75s;
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
@@ -24,4 +24,7 @@
   }
   .v-enter, .v-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+  }
+  .fade-move {
+      transition: transform 5s;
   }
