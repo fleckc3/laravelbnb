@@ -61391,7 +61391,7 @@ var staticRenderFns = [
       { staticClass: "pt-2 pb-2 d-flex justify-content-between" },
       [
         _c("span", [
-          _vm._v("\n                        Frommm\n                    ")
+          _vm._v("\n                        From\n                    ")
         ]),
         _vm._v(" "),
         _c("span")
