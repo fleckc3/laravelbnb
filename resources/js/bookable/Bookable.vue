@@ -111,7 +111,7 @@ export default {
             });
         },
         removeFromBasket() {
-            this.$store.dispatch("removeFromBasket", this.bookable.id);
+            this.$store.dispatch("removeFomBasket", this.bookable.id);
         }
     }
 };
