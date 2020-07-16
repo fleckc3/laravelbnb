@@ -22,8 +22,8 @@ export default {
             state.basket.items.push(payload);
         },
         removeFromBasket(state, payload) {
-            state.basket.items = state.basket.items.filter(item => item.bookable.id != payload);
-        }
+            state.basket.items = state.basket.items.filter(item => item.bookable.id !== payload);
+        },
     },
 
     // actions can asyn operations and other things based around the state
