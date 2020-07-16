@@ -2012,6 +2012,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["itemsInBasket"])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
@@ -61338,67 +61351,93 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._l(_vm.basket, function(item) {
-            return _c("div", { key: item.bookable.id }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "pt-2 pb-2 border-top d-flex justify-content-between"
-                },
-                [
-                  _c(
-                    "span",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          attrs: {
-                            to: {
-                              name: "bookable",
-                              params: { id: item.bookable.id }
+          _c(
+            "transition-group",
+            { attrs: { tag: "div" } },
+            _vm._l(_vm.basket, function(item) {
+              return _c("div", { key: item.bookable.id }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "pt-2 pb-2 border-top d-flex justify-content-between"
+                  },
+                  [
+                    _c(
+                      "span",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: {
+                                name: "bookable",
+                                params: { id: item.bookable.id }
+                              }
                             }
-                          }
-                        },
-                        [_vm._v(_vm._s(item.bookable.title))]
+                          },
+                          [_vm._v(_vm._s(item.bookable.title))]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "font-weight-bold" }, [
+                      _vm._v("$" + _vm._s(item.price.total))
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "pt-2 pb-2 d-flex justify-content-between" },
+                  [
+                    _c("span", [
+                      _vm._v(
+                        "\n                            From " +
+                          _vm._s(item.dates.from) +
+                          "\n                        "
                       )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "font-weight-bold" }, [
-                    _vm._v("$" + _vm._s(item.price.total))
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _vm._m(0, true)
-            ])
-          })
+                    ]),
+                    _vm._v(" "),
+                    _c("span", [
+                      _vm._v(
+                        "\n                            To " +
+                          _vm._s(item.dates.to) +
+                          "\n                        "
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "pt-2 pb-2 text-right" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sma btn-outline-secondary",
+                      on: {
+                        click: function($event) {
+                          return _vm.$store.dispatch(
+                            "removeFromBasket",
+                            item.bookable.id
+                          )
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-trash-alt" })]
+                  )
+                ])
+              ])
+            }),
+            0
+          )
         ],
-        2
+        1
       )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "pt-2 pb-2 d-flex justify-content-between" },
-      [
-        _c("span", [
-          _vm._v("\n                        From\n                    ")
-        ]),
-        _vm._v(" "),
-        _c("span")
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -79878,7 +79917,9 @@ __webpack_require__.r(__webpack_exports__);
       commit('addToBasket', payload);
       localStorage.setItem('basket', JSON.stringify(state.basket));
     },
-    removeFromBasket: function removeFromBasket() {
+    removeFromBasket: function removeFromBasket(_ref2, payload) {
+      var commit = _ref2.commit,
+          state = _ref2.state;
       commit('removeFromBasket', payload);
       localStorage.setItem('basket', JSON.stringify(state.basket));
     }
