@@ -19,7 +19,7 @@
                     </div>
                     <div class="pt-2 pb-2 d-flex justify-content-between">
                         <span>
-                            From
+                            Frommm
                         </span>
                         <span ></span>
                     </div>
