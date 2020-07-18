@@ -1,52 +1,114 @@
 <template>
     <div>
-        <div class="row">
-            <div class="col-md-8">
+        <success v-if="success">
+            Congrats on your purchase!
+        </success>
+        <div class="row" v-else>
+            <div v-if="itemsInBasket" class="col-md-8">
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label for="first_names">First names</label>
-                        <input type="text" class="form-control" name="first_names" v-model="customer.first_names"/>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="first_names"
+                            v-model="customer.first_names"
+                            :class="[{'is-invalid': errorFor('customer.first_names')}]" />
+                            <v-errors :errors="errorFor('customer.first_names')"></v-errors>
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="last_names">Last name</label>
-                        <input type="text" class="form-control" name="last_names" v-model="customer.last_names"/>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="last_names"
+                            v-model="customer.last_names"
+                            :class="[{'is-invalid': errorFor('customer.last_names')}]" />
+                            <v-errors :errors="errorFor('customer.last_names')"></v-errors>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" name="email" v-model="customer.email"/>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="email"
+                            v-model="customer.email"
+                            :class="[{'is-invalid': errorFor('customer.email')}]" />
+                            <v-errors :errors="errorFor('customer.email')"></v-errors>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label for="street">Street</label>
-                        <input type="text" class="form-control" name="street" v-model="customer.street"/>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="street"
+                            v-model="customer.street"
+                            :class="[{'is-invalid': errorFor('customer.street')}]" />
+                            <v-errors :errors="errorFor('customer.street')"></v-errors>
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="city">City</label>
-                        <input type="text" class="form-control" name="city" v-model="customer.city"/>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="city"
+                            v-model="customer.city"
+                            :class="[{'is-invalid': errorFor('customer.city')}]" />
+                            <v-errors :errors="errorFor('customer.city')"></v-errors>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label for="country">Country</label>
-                        <input type="text" class="form-control" name="country" v-model="customer.country"/>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="country"
+                            v-model="customer.country"
+                            :class="[{'is-invalid': errorFor('customer.country')}]" />
+                            <v-errors :errors="errorFor('customer.country')"></v-errors>
                     </div>
                     <div class="col-md-4 form-group">
                         <label for="state">State</label>
-                        <input type="text" class="form-control" name="state" v-model="customer.state"/>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="state"
+                            v-model="customer.state"
+                            :class="[{'is-invalid': errorFor('customer.state')}]" />
+                            <v-errors :errors="errorFor('customer.state')"></v-errors>
                     </div>
                     <div class="col-md-2 form-group">
                         <label for="zip_code">Zip code</label>
-                        <input type="text" class="form-control" name="zip_code" v-model="customer.zip_code"/>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="zip_code"
+                            v-model="customer.zip_code"
+                            :class="[{'is-invalid': errorFor('customer.zip_code')}]" />
+                            <v-errors :errors="errorFor('customer.zip_code')"></v-errors>
                     </div>
                 </div>
                 <hr />
                 <div class="row">
                     <div class="col-md-12 form-group">
-                        <button type="submit" class="btn btn-large btn-primary btn-block">Book now!</button>
+                        <button
+                            type="submit"
+                            class="btn btn-large btn-primary btn-block"
+                            @click.prevent="book"
+                            :disabled="loading"
+                        >Book now!</button>
                     </div>
+                </div>
+            </div>
+
+            <div class="col-md-8" v-else>
+                <div class="jumbotron jumbotron-fluid text-center">
+                    <h1>Empty</h1>
                 </div>
             </div>
             <div class="col-md-4">
@@ -91,10 +153,14 @@
 
 <script>
 import { mapGetters, mapState } from "vuex";
+import validationErrors from "./../shared/mixins/validationErrors";
 
 export default {
+    mixins: [validationErrors],
     data() {
         return {
+            loading: false,
+            boookingAttempted: false,
             customer: {
                 first_names: null,
                 last_names: null,
@@ -104,7 +170,6 @@ export default {
                 zip_code: null,
                 country: null,
                 state: null
-
             }
         }
     },
@@ -112,8 +177,34 @@ export default {
         ...mapGetters(["itemsInBasket"]),
         ...mapState({
             basket: state => state.basket.items
-        })
-    }
+        }),
+        success() {
+            return !this.loading && 0 === this.itemsInBasket && this.boookingAttempted;
+        }
+    },
+     methods: {
+            async book() {
+                this.boookingAttempted = false;
+                this.loading = true;
+                this.errors = null;
+                try {
+                    await axios.post(`/api/checkout`, {
+                        customer: this.customer,
+                        bookings: this.basket.map(basketItem => ({
+                            bookable_id: basketItem.bookable.id,
+                            from: basketItem.dates.from,
+                            to: basketItem.dates.to
+                        }))
+                    });
+                    this.$store.dispatch("clearBasket");
+                } catch (error) {
+                    this.errors = error.response && error.response.data.errors;
+                }
+
+                this.loading = false;
+                this.boookingAttempted = true;
+            }
+        }
 };
 </script>
 
